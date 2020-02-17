@@ -63,7 +63,7 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
 
     protected function parseAccessToken($response)
     {
-        $data = $response->json();
+        $data = json_decode($body, true);
 
         return $data['access_token'];
     }
