@@ -54,7 +54,7 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
                             $this->clientId . ':' . $this->clientSecret
                         ),
                     ],
-                    'body' => $this->getTokenFields($code),
+                    'form_params' => $this->getTokenFields($code),
                 ]
             );
 
