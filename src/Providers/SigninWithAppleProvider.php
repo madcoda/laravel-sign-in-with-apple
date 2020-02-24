@@ -50,9 +50,9 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
                 $this->getTokenUrl(),
                 [
                     'headers' => [
-                        // 'Authorization' => 'Basic '. base64_encode(
-                        //     $this->clientId . ':' . $this->clientSecret
-                        // ),
+                        'Authorization' => 'Basic '. base64_encode(
+                            $this->clientId . ':' . $this->clientSecret
+                        ),
                     ],
                     'form_params' => $this->getTokenFields($code),
                 ]
