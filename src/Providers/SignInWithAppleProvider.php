@@ -43,6 +43,11 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
         return "https://appleid.apple.com/auth/token";
     }
 
+    /**
+     * @deprecated
+     * @param [type] $code
+     * @return void
+     */
     public function getAccessToken($code)
     {
         $response = $this->getHttpClient()
@@ -73,6 +78,8 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
         $fields = parent::getTokenFields($code);
         $fields["grant_type"] = "authorization_code";
 
+        logger()->debug("getTokenFields = ", $fields);
+
         return $fields;
     }
 
@@ -85,6 +92,13 @@ class SignInWithAppleProvider extends AbstractProvider implements ProviderInterf
 
     public function user()
     {
+        logger()->debug("user() called");
+
+        $code = $this->getCode();
+        logger()->debug("code = ". $code);
+        logger()->debug("clientId = ". $this->clientId);
+        logger()->debug("clientSecret = ". $this->clientSecret);
+
         $response = $this->getAccessTokenResponse($this->getCode());
 
         $user = $this->mapUserToObject($this->getUserByToken(
